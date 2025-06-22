@@ -16,16 +16,28 @@ export const blogRouter = new Hono<{
 }>();
 
 
-blogRouter.use('/*',async (c,next)=>{
-    const header = c.req.header("Authorization") || "";
-    const user = await  verify(header,c.env.SECRET);
-    if(user){
-        c.set("userId", user.id);
-        await next();
-    } else {
-        return c.json({message : "you are not logged !!"});
+blogRouter.use('/*', async (c, next) => {
+    const authHeader = c.req.header("Authorization") || "";
+    if (!authHeader.startsWith("Bearer ")) {
+        c.status(401);
+        return c.json({ message: "Missing or invalid authorization header" });
     }
-    
+
+    const token = authHeader.split(' ')[1];
+
+    try {
+        const user = await verify(token, c.env.SECRET);
+        if (user && user.id) {
+            c.set("userId", user.id);
+            await next();
+        } else {
+            c.status(401);
+            return c.json({ message: "You are not logged in!" });
+        }
+    } catch (e) {
+        c.status(401);
+        return c.json({ message: "Invalid or expired token" });
+    }
 })
   
 blogRouter.post('/',async (c) => {

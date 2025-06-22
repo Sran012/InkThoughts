@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Avatar } from "./BlogCard";
 import { Logout } from "./Logout";
-// import { useBlogs } from "../hooks";
 
 
 export const Appbar = () => {
+  const userName = localStorage.getItem("userName") || "User";
 
   return (
     <div className="border-b flex justify-between px-10 py-4">
@@ -24,7 +24,7 @@ export const Appbar = () => {
             New Blog
           </button>
         </Link>
-        <Avatar size={"big"} name="Ahmed"/>
+        <Avatar size={"big"} name={userName}/>
         <Logout />
       </div>
       

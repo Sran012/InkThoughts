@@ -8,9 +8,6 @@ const signupInput = z.object({
 
 export type signupInput = z.infer<typeof signupInput>;
 
-
-
-
 const signininput = z.object({
     email : z.string().email(),
     password : z.string(),
@@ -18,9 +15,6 @@ const signininput = z.object({
 })
 
 export type Signininput = z.infer<typeof signininput>;
-
-
-
 
 const createbloginput = z.object({
     title : string(),

@@ -26,8 +26,6 @@ userRouter.post('/signup', async (c) => {
         datasourceUrl: c.env.DATABASE_URL,
       }).$extends(withAccelerate());
   
-      // const password = bcrypt.hash(body.password,10);
-  
       const user = await prisma.user.create({
         data: {
           email: body.email,
@@ -38,13 +36,10 @@ userRouter.post('/signup', async (c) => {
   
       const token = await sign({ id: user.id }, c.env.SECRET);
       
-      return c.text(token);
+      return c.json(token);
       
-    } catch (err) {
-      // @ts-ignore
-      console.error(err); // This will show in wrangler dev logs
-      // @ts-ignore
-      return c.text(`Error: ${err.message}`); // This will show the actual error
+    } catch (err: any) {
+      return c.json(`Error: ${err.message}`);
     }
 })
 
