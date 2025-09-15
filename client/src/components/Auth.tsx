@@ -17,12 +17,23 @@ export const Auth = ({type}: {type: "signup" | "signin"}) => {
   async function sendRequest () {
     try{
       const response = await axios.post(`${BACKEND_URL}/user/${type === "signup" ? "signup" : "signin"}`, postInputs);
-      const jwt = response.data;
-      localStorage.setItem("token", jwt);
-      localStorage.setItem("userName", postInputs.name || "");
-      navigate("/blogs")
-    } catch (e){
-      alert("Error while signing up")
+      
+      
+      if (response.status === 200 && typeof response.data === 'string') {
+        localStorage.setItem("token", response.data);
+        localStorage.setItem("userName", postInputs.name || "");
+        navigate("/blogs");
+      } else {
+        alert(response.data?.error || "An error occurred");
+      }
+    } catch (e: any){
+      const status = e.response?.status;
+      const message = e.response?.data?.error || e.response?.data?.message || e.message;
+      if (status === 400 || status === 401) {
+        alert(message || "Invalid credentials or inputs");
+        return;
+      }
+      alert("Error while signing up. Please check your connection and try again.");
     }
   }
 

@@ -17,7 +17,7 @@ const app = new Hono<{
 
 
 app.use('*', cors({
-  origin: ['http://localhost:3000', 'https://ink-thoughts.vercel.app'],
+  origin: ['http://localhost:5173', 'https://ink-thoughts.vercel.app'],
   allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowHeaders: ['Content-Type', 'Authorization'],
   credentials: true

@@ -19,7 +19,7 @@ userRouter.post('/signup', async (c) => {
     if (!success){
       return c.json({
         message : "inputs are invalid"
-      })
+      }, 400)
     }
     try {
       const prisma = new PrismaClient({
@@ -39,7 +39,9 @@ userRouter.post('/signup', async (c) => {
       return c.json(token);
       
     } catch (err: any) {
-      return c.json(`Error: ${err.message}`);
+      return c.json({ 
+        error: "Failed to create user. Please try again." 
+      }, 500);
     }
 })
 
@@ -49,7 +51,7 @@ userRouter.post('/signin', async (c)=> {
     if (!success){
       return c.json({
         message : "inputs are invalid"
-      })
+      }, 400)
     }
   const prisma = new PrismaClient({
     datasourceUrl : c.env.DATABASE_URL,
@@ -64,13 +66,15 @@ userRouter.post('/signin', async (c)=> {
     });
   
     if(!user){
-      return c.json("user not found");
+      return c.json({ error: "Invalid email or password" }, 401);
     }
   
     const token = await sign({id : user.id},c.env.SECRET);
     return c.json(token);
   } catch(err){
-    return c.json("error occured");
+    return c.json({ 
+      error: "Failed to sign in. Please try again." 
+    }, 500);
   }  
 })
   
