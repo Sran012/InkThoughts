@@ -30,10 +30,10 @@ export const Auth = ({type}: {type: "signup" | "signin"}) => {
       const status = e.response?.status;
       const message = e.response?.data?.error || e.response?.data?.message || e.message;
       if (status === 400 || status === 401) {
-        alert(message || "Invalid credentials or inputs");
+        alert(message || "Invalid credentials");
         return;
       }
-      alert("Error while signing up. Please check your connection and try again.");
+      alert("Error while signing up !");
     }
   }
 
@@ -41,10 +41,11 @@ export const Auth = ({type}: {type: "signup" | "signin"}) => {
     <div className="h-screen flex justify-center flex-col">
         <div className="flex justify-center">
           <div>
-            <div className="text-4xl font-extrabold pb-2">
-            Welcome to InkThoughts! <br />
+            <div className="text-4xl font-extrabold pb-2 flex ">
+            <div className="pr-2">Welcome to</div> 
+            <div className="hover:bg-blue-200 text-green-500">InkThoughts!</div> <br />
             </div>
-            <div className="text-3xl font-extrabold ">
+            <div className="text-3xl font-extrabold w-66 bg-green-200">
             Create an account
             </div>
             <div className="text-slate-500 mt-3 mb-3">
@@ -54,21 +55,21 @@ export const Auth = ({type}: {type: "signup" | "signin"}) => {
                 </Link>
             </div>
 
-            {type === "signup" ? <LabelledInput label="Name" placeholder="Sujal rana" onChange={(e) =>{
+            {type === "signup" ? <LabelledInput label="Name :" placeholder="Sujal rana" onChange={(e) =>{
               setPostInputs({
                 ...postInputs,
                 name: e.target.value
               })
             }}/> : null}
 
-            <LabelledInput label="email" placeholder="sj@mail.com" onChange={(e) =>{
+            <LabelledInput label="Email :" placeholder="sj@mail.com" onChange={(e) =>{
               setPostInputs({
                 ...postInputs,
                 email: e.target.value
               })
             }}/>
 
-            <LabelledInput label="Password" type={"password"} placeholder="123456" onChange={(e) =>{
+            <LabelledInput label="Password :" type={"password"} placeholder="123456" onChange={(e) =>{
               setPostInputs({
                 ...postInputs,
                 password: e.target.value
@@ -94,8 +95,8 @@ interface LabelledInputType{
 function LabelledInput({label, placeholder, onChange, type}: LabelledInputType){
   return <div>
 
-          <label className="block mb-2 text-sm font-semibold text-gray-900 dark:text-white">{label}</label>
-          <input onChange={onChange} type={type || "text"} id="first_name" className="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={placeholder} required />
+          <label className="block mb-2 text-sm font-semibold text-gray-900 ">{label}</label>
+          <input onChange={onChange} type={type || "text"} id="first_name" className="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 0 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder={placeholder} required />
             
         </div>
 }

@@ -13,11 +13,11 @@ export const Publish = () => {
 
   return (
     <div><Appbar />
-        <div className="flex justify-center w-full pt-8">
+        <div className="flex justify-center w-full pt-8 px-4">
             <div className="max-w-screen-lg w-full">
                 <input onChange={(e) => {
                     setTitle(e.target.value)
-                }} type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Title">
+                }} type="text" className="bg-slate-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Title">
                 </input>
                 <TextEditor onChange={(e) => {
                     setDescription(e.target.value)
@@ -72,11 +72,11 @@ function TextEditor({ onChange }: { onChange: (e: ChangeEvent<HTMLTextAreaElemen
     return(
 <div className="mt-8">
    <div className="w-full mb-4">
-       <div className="flex items-center justify-between px-3 py-2 border">
+       <div className="flex items-center justify-between px-3 py-2 border rounded-lg bg-slate-100">
        
         <div className="my-2 bg-white rounded-b-lg w-full">
             <label  className="sr-only">Publish post</label>
-            <textarea onChange={onChange} id="editor" rows={8} className="block w-full px-0 text-sm focus-outline-none text-gray-800 bg-white border-0  " placeholder="Write a blog..." required ></textarea>
+            <textarea onChange={onChange} id="editor" rows={8} className="block w-full px-2 py-2 text-md outline-none text-gray-800 bg-white border rounded-lg " placeholder="Write a blog..." required ></textarea>
         </div>
    </div>
    

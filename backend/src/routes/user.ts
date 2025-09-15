@@ -72,9 +72,7 @@ userRouter.post('/signin', async (c)=> {
     const token = await sign({id : user.id},c.env.SECRET);
     return c.json(token);
   } catch(err){
-    return c.json({ 
-      error: "Failed to sign in. Please try again." 
-    }, 500);
+    return c.json({ error: "Failed to sign in. Please try again." }, 500);
   }  
 })
   

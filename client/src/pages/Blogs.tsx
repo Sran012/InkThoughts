@@ -34,10 +34,10 @@ export const Blogs = () => {
         <div className="">
         {blogs.map((blog : any) => <BlogCard 
          id={blog.id}
-         authorname ={blog.author.name || "Jaser"}
+         authorname ={blog.author.name || "sujal"}
          title={blog.title}
          content={blog.content}
-         publishedDate={"23rd June"} />) }
+         publishedDate={"7th April"} />) }
         
        
       </div>
